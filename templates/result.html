@@ -20,8 +20,9 @@
     <button>Copy as PNG</button>
     <!-- Scanned image preview -->
     {% if scanned_image %}
-      <img src="{{ url_for('static', filename='uploads/' ~ scanned_image) }}" alt="Scanned Image" class="preview-image" />
+      <img src="{{ scanned_image }}" alt="Scanned Image" class="preview-image" />
     {% endif %}
+
 
 
 
