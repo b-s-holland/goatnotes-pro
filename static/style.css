@@ -1,0 +1,100 @@
+/* style.css */
+
+body {
+  background-color: #fdfcf9;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  text-align: center;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  border: 2px dashed #999;
+  background-color: #fffefa;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-top: 1em;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+textarea {
+  width: 97%;
+  height: 200px;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-left: 0px;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  resize: none;
+  text-align: center;
+}
+.notice {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: green;
+  font-style: italic;
+}
+
+.preview-image {
+  max-width: 100%;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #aaa;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.scan-output {
+  background: #f9f9f9;
+  padding: 15px;
+  border: 1px dashed #aaa;
+  font-family: monospace;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+}
+
+button {
+  margin: 10px 10px 0 0;
+}
+
+input {
+  background-color: #bdbdbd;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-top: 1em;
+}

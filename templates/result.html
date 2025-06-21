@@ -1,12 +1,31 @@
-<!-- templates/result.html -->
+<!-- result.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Scan Result</title>
+  <title>Your captured page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Scan complete!</h1>
-  <p>Your page has been saved.</p>
+  <div class="container">
+    <h1>Your page is ready</h1>
+    <!-- Feedback notice -->
+    <div id="copyNotice" class="notice" style="display: none;"></div>
+    <!-- Buttons -->
+    <button onclick="copyScanResult()">Copy text to clipboard</button><br><br>
+    <!-- Scanned text display -->
+    <div id="scanResult" class="scan-output">
+      <p>{{ scanned_text }}</p>
+    </div><br>
+    <button>Save/Share as PDF</button>
+    <button>Copy as PNG</button>
+    <!-- Scanned image preview -->
+    {% if scanned_image %}
+      <img src="{{ url_for('static', filename='uploads/' ~ scanned_image) }}" alt="Scanned Image" class="preview-image" />
+    {% endif %}
+
+
+
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

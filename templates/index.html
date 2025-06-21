@@ -1,14 +1,32 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>GOAT Notes Capture</title>
+  <title>Capture your page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Capture your page</h1>
-  <form action="/process" method="post">
-    <button type="submit">Simulate Scan</button>
-  </form>
+  <div class="container">
+    <h1>Capture your page</h1>
+
+    <form action="/process" method="POST" enctype="multipart/form-data">
+      <label><br>Scan with camera:</label><br>
+      <button type="submit" name="action" value="scan">Scan Now</button><br><br>
+
+      <label><br>OR<br><br>Upload image:</label><br>
+      <input type="file" name="file" id="file" accept="image/*"><br>
+      <button type="submit" name="action" value="upload">Submit</button><br><br>
+    </form>
+
+    <div id="uploading" style="display: none; text-align: center; margin-top: 20px;">
+      <p>Uploading your page...</p>
+      <p>⏳ ⏳ ⏳</p>
+    </div>
+
+    <script>
+      document.querySelector("form").addEventListener("submit", function() {
+        document.getElementById("uploading").style.display = "block";
+      });
+    </script>
+  </div>
 </body>
 </html>
