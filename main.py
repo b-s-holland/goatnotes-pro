@@ -33,7 +33,7 @@ def process():
         # For now just simulate a placeholder
         extracted_text = "This is a simulated camera scan."
         filename = "placeholder-image.png"
-        elif action == "upload":
+    elif action == "upload":
         file = request.files.get('file')
         if file and file.filename:
             # Upload to Cloudinary instead of saving locally
