@@ -23,7 +23,21 @@
     </div>
 
     <script>
-      document.querySelector("form").addEventListener("submit", function() {
+      document.querySelector("form").addEventListener("submit", function(e) {
+        const fileInput = document.getElementById("file");
+        const action = document.activeElement.value;
+        
+        if (action === "upload" && fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          const maxSize = 5 * 1024 * 1024; // 5MB limit for upload
+          
+          if (file.size > maxSize) {
+            alert("File is too large. Please choose a file smaller than 5MB.");
+            e.preventDefault();
+            return;
+          }
+        }
+        
         document.getElementById("uploading").style.display = "block";
       });
     </script>
