@@ -23,5 +23,5 @@ task = "shell.exec"
 args = "python main.py"
 
 [[ports]]
-localPort = 3000
+localPort = 5000
 externalPort = 80
