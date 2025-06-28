@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Your captured page</title>
 
-  <!-- Load Overpass font from Google Fonts -->
+  <!-- ✅ Overpass Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
 
-  <!-- Custom Styles -->
-    <style>
-    /* Global font */
+  <!-- ✅ Inline Custom Styles -->
+  <style>
     body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
       font-family: 'Overpass', sans-serif;
     }
@@ -20,14 +19,12 @@
       padding: 0;
     }
 
-    /* Main container for spacing */
     .container {
       padding: 30px 20px;
       max-width: 1000px;
       margin: 0 auto;
     }
 
-    /* White card sections */
     .container, #scanResult, .ai-cleaned-layout, .extracted-text-section, #htmlPreview, .html-preview {
       background-color: #ffffff;
       padding: 20px;
@@ -36,7 +33,6 @@
       margin-bottom: 30px;
     }
 
-    /* Specific AI Layout Preview block */
     .ai-cleaned-layout {
       background-color: #ffffff;
       padding: 20px;
@@ -48,15 +44,9 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* Text content inside preview: readable and spacious */
-    .ai-cleaned-layout h1,
-    .ai-cleaned-layout h2,
-    .ai-cleaned-layout h3,
-    .ai-cleaned-layout p,
-    .ai-cleaned-layout ul,
-    .ai-cleaned-layout ol,
-    .ai-cleaned-layout li,
-    .ai-cleaned-layout table {
+    .ai-cleaned-layout h1, .ai-cleaned-layout h2, .ai-cleaned-layout h3,
+    .ai-cleaned-layout p, .ai-cleaned-layout ul, .ai-cleaned-layout ol,
+    .ai-cleaned-layout li, .ai-cleaned-layout table {
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
@@ -64,96 +54,101 @@
       color: #333333;
     }
 
-    /* Headings hierarchy and spacing */
     .ai-cleaned-layout h1 { font-size: 1.8rem; margin-top: 20px; margin-bottom: 10px; }
     .ai-cleaned-layout h2 { font-size: 1.4rem; margin-top: 20px; margin-bottom: 10px; }
     .ai-cleaned-layout h3 { font-size: 1.2rem; margin-top: 15px; margin-bottom: 8px; }
 
-    /* Paragraphs and lists */
     .ai-cleaned-layout p { margin: 12px 0; }
     .ai-cleaned-layout ul, .ai-cleaned-layout ol { padding-left: 20px; margin: 12px 0; }
 
-    /* Table style */
     .ai-cleaned-layout table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.95rem;
     }
 
-    .ai-cleaned-layout th,
-    .ai-cleaned-layout td {
+    .ai-cleaned-layout th, .ai-cleaned-layout td {
       border-bottom: 1px solid #ccc;
       padding: 8px 10px;
       text-align: left;
     }
 
-    .ai-cleaned-layout th {
-      font-weight: bold;
+    .ai-cleaned-layout th { font-weight: bold; }
+    .ai-cleaned-layout tr:last-child td { border-bottom: none; }
+
+    /* Uploaded Image styling */
+    .uploaded-image img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      display: block;
+      margin: 10px auto;
+      max-width: 800px;
     }
 
-    .ai-cleaned-layout tr:last-child td {
-      border-bottom: none;
-    }
-    </style>
+  </style>
 
-
-
-  <!-- Your existing stylesheet, if needed -->
+  <!-- ✅ Your external CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
 
-    <h1>Your page is ready</h1>
+<div class="container">
 
-    <!-- ✅ Copy Button -->
-    <button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
+  <h1>Your page is ready</h1>
 
-    <!-- ✅ Extracted Text -->
-    <h2>Extracted Text:</h2>
-    <div id="scanResult" class="scan-output">
-        <p>{{ scanned_text }}</p>
-    </div>
+  <!-- ✅ Copy Button -->
+  <button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
 
-    {% if generated_html_layout %}
-    <h3>AI-Cleaned Layout Preview</h3>
+  <!-- ✅ Extracted Text -->
+  <h2>Extracted Text:</h2>
+  <div id="scanResult" class="scan-output">
+    <p>{{ scanned_text }}</p>
+  </div>
+
+  {% if generated_html_layout %}
+
+    <!-- ✅ Download Button -->
+    <form action="/print_view" method="post" target="_blank">
+      <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+      <button type="submit" class="download-button">Download/Shar PDF</button><br><h3>AI-Cleaned Layout Preview</h3> 
+    </form>
+
+    <!-- ✅ AI Layout Preview -->
     <div class="ai-cleaned-layout">
-      <div class="ai-preview-content" style="text-align: left;">
+      <div class="ai-preview-content">
         {{ generated_html_layout | safe }}
       </div>
     </div>
 
-    {% endif %}
-
-    <!-- ✅ Download and Save Buttons -->
-    <form action="/print_view" method="post" target="_blank">
-        <textarea name="html_content" style="display:none; text-align:left;">{{ generated_html_layout | safe }}</textarea><br><br>
-        <button type="submit" class="download-button">Download PDF (Print Clean Export)</button>
-    </form>
-
+    <!-- ✅ Save as PNG Button -->
     <form action="/save_png" method="post" target="_blank">
-        <textarea name="html_content" style="display:none; text-align:left;">{{ generated_html_layout | safe }}</textarea>
-        <button type="submit" class="png-button">Save AI Layout as PNG</button>
+      <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+      <button type="submit" class="png-button">Save AI Layout as PNG</button>
     </form>
+  {% endif %}
 
-    <!-- ✅ Original Uploaded Image Preview -->
-    {% if scanned_image %}
+  <!-- ✅ Original Uploaded Image Thumbnail -->
+  {% if scanned_image %}
     <h3>Original Uploaded Image</h3>
     <div class="uploaded-image">
-        <img src="{{ scanned_image }}" alt="Original Uploaded Image" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+      <img src="{{ scanned_image }}" alt="Original Uploaded Image">
     </div>
-    {% endif %}
+  {% endif %}
 
-    <script>
-        function copyText() {
-            const text = `{{ scanned_text | safe }}`;
-            navigator.clipboard.writeText(text).then(function() {
-                alert('Text copied to clipboard!');
-            }, function(err) {
-                alert('Failed to copy text: ', err);
-            });
-        }
-    </script>
+</div>
+
+<!-- ✅ JavaScript: Clipboard Copy -->
+<script>
+  function copyText() {
+    const text = `{{ scanned_text | safe }}`;
+    navigator.clipboard.writeText(text).then(function() {
+      alert('Text copied to clipboard!');
+    }, function(err) {
+      alert('Failed to copy text: ', err);
+    });
+  }
+</script>
 
 </body>
 </html>
