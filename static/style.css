@@ -1,16 +1,11 @@
-// <weight>: Use a value from 100 to 900
-// <uniquifier>: Use a unique and descriptive class name
-
-.overpass-<uniquifier> {
-  font-family: "Overpass", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
+/* ✅ Overpass font family */
+body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
+  font-family: 'Overpass', sans-serif;
 }
-/* Mobile-first Base Styles */
+
+/* ✅ Mobile-first base styles */
 body {
   background-color: #ccc;
-  font-family: 'Overpass';
   margin: 0;
   padding: 0;
   color: #333;
@@ -26,14 +21,14 @@ body {
   border: 2px dashed #999;
   background-color: #fffefa;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 h1, h2 {
   font-size: 1.4rem;
   margin-bottom: 1em;
-  font-family: 'Overpass';
-    
 }
 
 button, .custom-file-upload {
@@ -106,95 +101,96 @@ input[type="file"] {
   margin-top: 10px;
 }
 
+/* ✅ Large mobile-friendly buttons */
 button {
-  display: inline-block;
-  width: auto;
-  max-width: 90%;
-  padding: 32px 32px;
-  font-size: 32px;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  padding: 16px 20px;
+  font-size: 18px;
   text-align: center;
   border-radius: 6px;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  font-family: 'Overpass', sans serif;
+  font-family: 'Overpass', sans-serif;
+  margin: 12px auto;
 }
 
+/* ✅ Thumbnail Preview (HTML layout preview) */
 .thumbnail-preview {
-    border: 1px dashed #999;
-    padding: 16px;
-    margin-top: 20px;
-    background-color: #fff;
-    max-width: 500px;
-    overflow-x: auto;
-    align-content: center;
-    display: contents;
-    text-align: left;
+  border: 1px dashed #999;
+  padding: 16px;
+  margin-top: 20px;
+  background-color: #fff;
+  max-width: 500px;
+  overflow-x: auto;
+  text-align: left;
 }
 
 .thumbnail-preview table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .thumbnail-preview table,
 .thumbnail-preview th,
 .thumbnail-preview td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-    font-family: Overpass, sans-serif;
-    font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
 }
 
 .thumbnail-preview h1,
 .thumbnail-preview h2,
 .thumbnail-preview h3 {
-    font-family: Overpass, sans-serif;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 4px;
-    margin-top: 16px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  margin-top: 16px;
 }
 
 .thumbnail-preview div,
 .thumbnail-preview section,
 .thumbnail-preview li {
-    font-family: Overpass, sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
-    text-align: left;
-    margin-inline: 10px;
-    max-width: 575px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+  margin-inline: 10px;
+  max-width: 575px;
 }
 
 .thumbnail-preview ul,
 .thumbnail-preview ol {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .thumbnail-preview input,
 .thumbnail-preview button,
 .thumbnail-preview textarea {
-    display: inline-block;
-    border: 1px solid #aaa;
-    padding: 4px 8px;
-    font-size: 13px;
-    background-color: #ffffff;
+  display: inline-block;
+  border: 1px solid #aaa;
+  padding: 4px 8px;
+  font-size: 13px;
+  background-color: #ffffff;
 }
 
+/* ✅ Uploaded Image Preview */
 .uploaded-image {
-    margin-top: 20px;
-    max-width: 600px;
-    display: inline-block;
+  margin-top: 20px;
+  max-width: 600px;
+  display: block;
 }
 
 .uploaded-image img {
-    width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    display: block;
-    margin: 0 auto;
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  display: block;
+  margin: 0 auto;
 }
+
+/* ✅ AI-Cleaned Layout Area */
 .ai-cleaned-layout {
   background-color: #ffffff;
   padding: 30px 40px;
@@ -211,13 +207,16 @@ button {
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  text-align: left;
 }
+
+/* ✅ Print styles */
 @media print {
   body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
     font-family: 'Overpass', sans-serif;
-    color: #000000; /* Optional: Ensure black print text */
-    background: none !important; /* Optional: Remove any background colours during print */
-    box-shadow: none !important; /* Optional: Remove any shadows in print */
+    color: #000000;
+    background: none !important;
+    box-shadow: none !important;
   }
 
   .ai-cleaned-layout, .container, .ai-preview-content {
@@ -225,4 +224,82 @@ button {
     border: none !important;
     box-shadow: none !important;
   }
+}
+* {
+  padding: 0;
+  margin: auto;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(19, 19, 64);
+}
+
+.flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainbox {
+  height: 400px;
+  width: 400px;
+  background-color: none;
+  position: relative;
+}
+
+.box {
+  width: 260px;
+  height: 250px;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 15px;
+  gap:30px;
+  margin: 15px;
+}
+.b1,.mrow,.bcol{
+     overflow: hidden;
+}
+.b1 {
+  height: 100px;
+  width: 245px;
+  background-color: #d9d9d9;
+  border-radius:5px;
+
+}
+.b2 {
+  flex-direction: column;
+gap:10px;
+}
+
+.mrow {
+  height: 10px;
+  width: 245px;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+}
+.b3{
+gap:10px;
+}
+.bcol {
+  height: 25px;
+  width: 114px;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+}
+
+.shadow{
+  height: 100px;
+  width: 20px;
+  background-color: #fff;
+  filter: blur(10px);
+  margin-left: 240px;
+  animation: anim 1s  ease-out infinite ;
+
+  transform: rotate(45deg);
+}
+
+@keyframes anim{
+  0%{transform: translate(-200px);}
 }
