@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GOAT Notes – Export View</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Hide buttons etc for clean export */
+    @media print {
+      button, h1, h2, .notice, .preview-image {
+        display: none !important;
+      }
+    }
+    body {
+      background: white;
+      color: black;
+      text-align: left;
+    }
+    .gpt-output {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>GOAT Notes – Export View</h1>
+  <div class="gpt-output">
+    {{ html_content | safe }}
+  </div>
+
+  <script>
+    window.onload = function() {
+      window.print();
+    };
+  </script>
+</body>
+</html>

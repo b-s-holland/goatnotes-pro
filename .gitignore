@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Flask/Uploads
+instance/
+.env
+*.sqlite3
+*.log
+
+# Replit
+*.replit
+.replit/
+.pythonlibs/
+
+# VSCode
+.vscode/
+
+# Mac/Linux system
+.DS_Store
+
+# Upload folders
+static/uploads/

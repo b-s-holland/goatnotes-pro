@@ -1,32 +1,71 @@
-<!-- result.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Your captured page</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Your captured page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+    <style>    
+      body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Italiana', sans-serif;
+      font-size: 16px;
+      background: #ccc;
+      color: #333333;
+    }
+    </style>
 <body>
-  <div class="container">
+
     <h1>Your page is ready</h1>
-    <!-- Feedback notice -->
-    <div id="copyNotice" class="notice" style="display: none;"></div>
-    <!-- Buttons -->
-    <button onclick="copyScanResult()">Copy text to clipboard</button><br><br>
-    <!-- Scanned text display -->
+
+    <!-- ✅ Copy Button -->
+    <button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
+
+    <!-- ✅ Extracted Text -->
+    <h2 style="color: #ffffff;">Extracted Text:</h2>
     <div id="scanResult" class="scan-output">
-      <p>{{ scanned_text }}</p>
-    </div><br>
-    <button>Save/Share as PDF</button>
-    <button>Copy as PNG</button>
-    <!-- Scanned image preview -->
-    {% if scanned_image %}
-      <img src="{{ scanned_image }}" alt="Scanned Image" class="preview-image" />
+        <p>{{ scanned_text }}</p>
+    </div>
+
+    {% if generated_html_layout %}
+    <h3>AI-Cleaned Layout Preview</h3>
+    <div class="thumbnail-preview">
+        <div class="gpt-output">
+            {{ generated_html_layout | safe }}
+        </div>
+    </div>
     {% endif %}
 
+    <!-- ✅ Download and Save Buttons -->
+    <form action="/print_view" method="post" target="_blank">
+        <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea><br><br>
+        <button type="submit" class="download-button">Download PDF (Print Clean Export)</button>
+    </form>
 
+    <form action="/save_png" method="post" target="_blank">
+        <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+        <button type="submit" class="png-button">Save AI Layout as PNG</button>
+    </form>
 
+    <!-- ✅ Original Uploaded Image Preview -->
+    {% if scanned_image %}
+    <h3>Original Uploaded Image</h3>
+    <div class="uploaded-image">
+        <img src="{{ scanned_image }}" alt="Original Uploaded Image" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+    </div>
+    {% endif %}
 
-  </div>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function copyText() {
+            const text = `{{ scanned_text | safe }}`;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Text copied to clipboard!');
+            }, function(err) {
+                alert('Failed to copy text: ', err);
+            });
+        }
+    </script>
+
 </body>
 </html>
