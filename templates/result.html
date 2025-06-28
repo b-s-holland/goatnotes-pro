@@ -1,20 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Your captured page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-    <style>    
-      body {
+  <meta charset="UTF-8">
+  <title>Your captured page</title>
+
+  <!-- Load Overpass font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+    <style>
+    /* Global font */
+    body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
+      font-family: 'Overpass', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
       margin: 0;
       padding: 0;
-      font-family: 'Italiana', sans-serif;
-      font-size: 16px;
-      background: #ccc;
+    }
+
+    /* Main container for spacing */
+    .container {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* White card sections */
+    .container, #scanResult, .ai-cleaned-layout, .extracted-text-section, #htmlPreview, .html-preview {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    /* Specific AI Layout Preview block */
+    .ai-cleaned-layout {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      max-width: 800px;
+      margin: 40px auto;
+      color: #333333;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Text content inside preview: readable and spacious */
+    .ai-cleaned-layout h1,
+    .ai-cleaned-layout h2,
+    .ai-cleaned-layout h3,
+    .ai-cleaned-layout p,
+    .ai-cleaned-layout ul,
+    .ai-cleaned-layout ol,
+    .ai-cleaned-layout li,
+    .ai-cleaned-layout table {
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
       color: #333333;
     }
+
+    /* Headings hierarchy and spacing */
+    .ai-cleaned-layout h1 { font-size: 1.8rem; margin-top: 20px; margin-bottom: 10px; }
+    .ai-cleaned-layout h2 { font-size: 1.4rem; margin-top: 20px; margin-bottom: 10px; }
+    .ai-cleaned-layout h3 { font-size: 1.2rem; margin-top: 15px; margin-bottom: 8px; }
+
+    /* Paragraphs and lists */
+    .ai-cleaned-layout p { margin: 12px 0; }
+    .ai-cleaned-layout ul, .ai-cleaned-layout ol { padding-left: 20px; margin: 12px 0; }
+
+    /* Table style */
+    .ai-cleaned-layout table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .ai-cleaned-layout th,
+    .ai-cleaned-layout td {
+      border-bottom: 1px solid #ccc;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .ai-cleaned-layout th {
+      font-weight: bold;
+    }
+
+    .ai-cleaned-layout tr:last-child td {
+      border-bottom: none;
+    }
     </style>
+
+
+
+  <!-- Your existing stylesheet, if needed -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
 <body>
 
     <h1>Your page is ready</h1>
@@ -23,18 +110,19 @@
     <button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
 
     <!-- ✅ Extracted Text -->
-    <h2 style="color: #ffffff;">Extracted Text:</h2>
+    <h2>Extracted Text:</h2>
     <div id="scanResult" class="scan-output">
         <p>{{ scanned_text }}</p>
     </div>
 
     {% if generated_html_layout %}
     <h3>AI-Cleaned Layout Preview</h3>
-    <div class="thumbnail-preview">
-        <div class="gpt-output">
-            {{ generated_html_layout | safe }}
-        </div>
+    <div class="ai-cleaned-layout">
+      <div class="ai-preview-content">
+        {{ generated_html_layout | safe }}
+      </div>
     </div>
+
     {% endif %}
 
     <!-- ✅ Download and Save Buttons -->
@@ -44,7 +132,7 @@
     </form>
 
     <form action="/save_png" method="post" target="_blank">
-        <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+        <textarea name="html_content" style="display:none; text-align:left;">{{ generated_html_layout | safe }}</textarea>
         <button type="submit" class="png-button">Save AI Layout as PNG</button>
     </form>
 
