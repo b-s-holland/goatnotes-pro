@@ -4,22 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>From scribble to structure.</title>
-
-  <!-- ✅ Google Fonts: Overpass -->
-  <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
-
-  <!-- ✅ Your own stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-  <!-- ✅ Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDJD9VRPKB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-CDJD9VRPKB');
-  </script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+
     body {
       margin: 0;
       padding: 0;
@@ -106,8 +95,22 @@
       <button type="submit" class="submit-button" value="upload">Submit</button><br>
       <div id="uploading" style="display: none; text-align: center; margin-top: 10px;"><br>
         <p>Uploading your page...</p>
-        <p>⏳ ⏳ ⏳</p>
-      </div>
+        <div class="mainbox flexbox">
+            <div class="box flexbox">
+                <div class="box b1 flexbox">
+                    <div class="shadow"></div>
+                </div>
+                <div class="box b2 flexbox">
+                    <div class="mrow"> <div class="shadow"></div></div>
+                    <div class="mrow"> <div class="shadow"></div></div>
+                    <div class="mrow"> <div class="shadow"></div></div>
+                </div>
+                <div class="box b3 flexbox">
+                    <div class="bcol"> <div class="shadow"></div></div>
+                    <div class="bcol"> <div class="shadow"></div></div>
+                </div>
+            </div>
+        </div>
       <img id="preview-image" src="" alt="Image preview" style="max-width: 300px; max-height: auto; width: 100%; display: none; margin-top: 1rem; border: 1px dashed #333;" /><br>
     </form>
 
@@ -150,7 +153,7 @@
     </script>
   </div>
     <hr>
-    <p>GOATNotes.Pro turns your messy whiteboard notes, notebook pages, or brainstorm sketches into clean, readable, exportable text or HTML code.</p>
+    <br><p margin="10px;">GOATNotes.pro can turn most messy, handwritten whiteboard notes, notebook pages, or brainstorm sketches into clean, readable, plain text content, and structured HTML PDF exports. Results may vary based on image contrast and quality.</p>
   </div>
 </body>
 </html>
