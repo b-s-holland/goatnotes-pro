@@ -212,3 +212,17 @@ button {
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
+@media print {
+  body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
+    font-family: 'Overpass', sans-serif;
+    color: #000000; /* Optional: Ensure black print text */
+    background: none !important; /* Optional: Remove any background colours during print */
+    box-shadow: none !important; /* Optional: Remove any shadows in print */
+  }
+
+  .ai-cleaned-layout, .container, .ai-preview-content {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
