@@ -118,7 +118,7 @@
     {% if generated_html_layout %}
     <h3>AI-Cleaned Layout Preview</h3>
     <div class="ai-cleaned-layout">
-      <div class="ai-preview-content">
+      <div class="ai-preview-content" style="text-align: left;">
         {{ generated_html_layout | safe }}
       </div>
     </div>
@@ -127,7 +127,7 @@
 
     <!-- ✅ Download and Save Buttons -->
     <form action="/print_view" method="post" target="_blank">
-        <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea><br><br>
+        <textarea name="html_content" style="display:none; text-align:left;">{{ generated_html_layout | safe }}</textarea><br><br>
         <button type="submit" class="download-button">Download PDF (Print Clean Export)</button>
     </form>
 
