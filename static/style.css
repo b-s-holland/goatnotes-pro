@@ -66,6 +66,7 @@ textarea {
   border: 1px solid #ccc;
   resize: vertical;
   text-align: left;
+  margin-left: 10px;
 }
 
 input[type="file"] {
@@ -86,7 +87,7 @@ input[type="file"] {
   border: 1px solid #aaa;
   border-radius: 4px;
   margin: 1rem 0;
-  text-align: center;
+  text-align: left;
 }
 
 .scan-output {
@@ -128,6 +129,7 @@ button {
     overflow-x: auto;
     align-content: center;
     display: contents;
+    text-align: left;
 }
 
 .thumbnail-preview table {
