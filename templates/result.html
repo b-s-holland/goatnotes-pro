@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Your captured page</title>
 
   <!-- ✅ Overpass Google Font -->
@@ -97,11 +98,9 @@
 
   <h1>Your page is ready</h1>
 
-  <!-- ✅ Copy Button -->
-  <button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
-
   <!-- ✅ Extracted Text -->
-  <h2>Extracted Text:</h2>
+  <h3>Extracted Text:</h3>
+<button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
   <div id="scanResult" class="scan-output">
     <p>{{ scanned_text }}</p>
   </div>
@@ -111,7 +110,7 @@
     <!-- ✅ Download Button -->
     <form action="/print_view" method="post" target="_blank">
       <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
-      <button type="submit" class="download-button">Download/Share PDF</button><br><h3>AI-Cleaned Layout Preview</h3> 
+      <h3>AI-Cleaned Layout Preview</h3> <button type="custom-file-upload" class="">Download/Share PDF</button>
     </form>
 
     <!-- ✅ AI Layout Preview -->
@@ -121,16 +120,15 @@
       </div>
     </div>
 
-    <!-- ✅ Save as PNG Button -->
-    <form action="/save_png" method="post" target="_blank">
+    <!-- ✅ Start again Button -->
       <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
-      <button type="submit" class="png-button">Save AI Layout as PNG</button>
-    </form>
+      <button type="custom-file-upload"><a href="https://goatnotes.pro" style="text-decoration: none; color: #fff;" class=>Convert Another Note</a></button>
+
   {% endif %}
 
   <!-- ✅ Original Uploaded Image Thumbnail -->
   {% if scanned_image %}
-    <h3>Original Uploaded Image</h3>
+    <br><h3>Your Uploaded Image</h3>
     <div class="uploaded-image">
       <img src="{{ scanned_image }}" alt="Original Uploaded Image">
     </div>
