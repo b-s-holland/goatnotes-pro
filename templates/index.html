@@ -4,11 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>From scribble to structure.</title>
+
+  <!-- ✅ Google Fonts: Overpass -->
+  <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+
+  <!-- ✅ Your own stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+  <!-- ✅ Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDJD9VRPKB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CDJD9VRPKB');
+  </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
-
     body {
       margin: 0;
       padding: 0;
