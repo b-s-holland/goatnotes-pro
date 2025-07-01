@@ -111,7 +111,7 @@
 
     <!-- ✅ Download Button -->
     <form action="/print_view" method="post" target="_blank">
-      <textarea id="copySource" style="position: absolute; left: -9999px;">{{ scanned_text }}</textarea>
+      <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
       <h3>AI-Cleaned Layout Preview</h3> <button type="custom-file-upload" class="">Download/Share PDF</button>
     </form>
 
