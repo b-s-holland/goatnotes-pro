@@ -8,6 +8,7 @@
   <!-- ✅ Overpass Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
 
+
   <!-- ✅ CodeMirror CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/dracula.min.css">
@@ -107,13 +108,17 @@
     }
   </style>
 
-  <link rel="stylsheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='gn-favicon.svg') }}">
 
 </head>
 <body>
 
 <div class="container">
+  <a href="https://goatnotes.pro" class="back-button" aria-label="Start Again">
+    <img src="{{ url_for('static', filename='back-button.svg') }}" alt="Back Button" style="width: 50px; height: auto;">
+  </a>
+
 
   <h1>Your page is ready</h1>
 
@@ -161,7 +166,7 @@
 
 <!-- ✅ CodeMirror JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/htmlmixed/htmlmixed.min.js"></script>
+
 
 <!-- ✅ Clipboard Copy Script -->
 <script>
@@ -176,6 +181,18 @@
     });
   }
 </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/css/css.min.js"></script>
+  <!-- ✅ Core CodeMirror -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+
+  <!-- ✅ Modes Required for htmlmixed -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/htmlmixed/htmlmixed.min.js"></script>
 
   <script>
     const editor = CodeMirror.fromTextArea(document.getElementById('htmlEditor'), {
