@@ -8,7 +8,10 @@
   <!-- ✅ Overpass Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
 
-  <!-- ✅ Inline Custom Styles -->
+  <!-- ✅ CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/eclipse.min.css">
+
   <style>
     body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
       font-family: 'Overpass', sans-serif;
@@ -26,8 +29,8 @@
       margin: 0 auto;
     }
 
-    .container, #scanResult, .ai-cleaned-layout, .extracted-text-section, #htmlPreview, .html-preview {
-      background-color: #ffffff;
+    .container, #scanResult, .ai-cleaned-layout, .extracted-text-section, #htmlPreview, .html-preview, .editor-preview-wrapper {
+      background-color: #fefefe;
       padding: 20px;
       border-radius: 6px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -58,7 +61,6 @@
     .ai-cleaned-layout h1 { font-size: 1.8rem; margin-top: 20px; margin-bottom: 10px; }
     .ai-cleaned-layout h2 { font-size: 1.4rem; margin-top: 20px; margin-bottom: 10px; }
     .ai-cleaned-layout h3 { font-size: 1.2rem; margin-top: 15px; margin-bottom: 8px; }
-
     .ai-cleaned-layout p { margin: 12px 0; }
     .ai-cleaned-layout ul, .ai-cleaned-layout ol { padding-left: 20px; margin: 12px 0; }
 
@@ -77,7 +79,6 @@
     .ai-cleaned-layout th { font-weight: bold; }
     .ai-cleaned-layout tr:last-child td { border-bottom: none; }
 
-    /* Uploaded Image styling */
     .uploaded-image img {
       width: 100%;
       height: auto;
@@ -87,9 +88,25 @@
       max-width: 800px;
     }
 
+    .editor-preview-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .CodeMirror {
+      height: 400px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    #htmlPreview iframe {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #ccc;
+    }
   </style>
 
-  <!-- ✅ Your external CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='gn-favicon.svg') }}">
 
@@ -100,7 +117,6 @@
 
   <h1>Your page is ready</h1>
 
-  <!-- ✅ Extracted Text -->
   <h3>Extracted Text:</h3>
   <button type="button" class="copy-button" onclick="copyText()">Copy text to clipboard</button>
   <div id="scanResult" class="scan-output">
@@ -109,26 +125,37 @@
 
   {% if generated_html_layout %}
 
-    <!-- ✅ Download Button -->
-    <form action="/print_view" method="post" target="_blank">
-      <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
-      <h3>AI-Cleaned Layout Preview</h3> <button type="custom-file-upload" class="">Download/Share PDF</button>
-    </form>
+  <h3>AI-Cleaned Layout Preview:</h3>
 
-    <!-- ✅ AI Layout Preview -->
-    <div class="ai-cleaned-layout">
-      <div class="ai-preview-content">
-        {{ generated_html_layout | safe }}
-      </div>
+  <!-- ✅ PDF Download Button - Place BEFORE or AFTER the user HTML preview container -->
+  <form action="/print_view" method="post" target="_blank">
+    <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+    <button type="submit">Download/Share PDF</button>
+  </form>
+
+  <!-- ✅ User HTML Output (safe) -->
+  <div class="ai-cleaned-layout">
+    <div class="ai-preview-content">
+      {{ generated_html_layout | safe }}
     </div>
+  </div>
 
-    <!-- ✅ Start again Button -->
-      <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
-      <button type="custom-file-upload"><a href="https://goatnotes.pro" style="text-decoration: none; color: #fff;" class=>Convert Another Note</a></button>
+  <!-- ✅ Live HTML Editor + Preview -->
+  <div class="editor-preview-wrapper">
+    <h3>📝 Edit HTML and Preview Live:</h3>
+    <textarea id="htmlEditor">{{ generated_html_layout | safe }}</textarea>
+    <div id="htmlPreview">
+      <iframe></iframe>
+    </div>
+  </div>
+
+  <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+  <button type="custom-file-upload">
+    <a href="https://goatnotes.pro" style="text-decoration: none; color: #fff;">Convert Another Note</a>
+  </button>
 
   {% endif %}
 
-  <!-- ✅ Original Uploaded Image Thumbnail -->
   {% if scanned_image %}
     <br><h3>Your Uploaded Image</h3>
     <div class="uploaded-image">
@@ -138,19 +165,83 @@
 
 </div>
 
-  <!-- ✅ JavaScript: Clipboard Copy -->
+<!-- ✅ CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/htmlmixed/htmlmixed.min.js"></script>
+
+<!-- ✅ Clipboard Copy Script -->
+<script>
+  function copyText() {
+    const copyTextArea = document.getElementById('copySource');
+    copyTextArea.select();
+    copyTextArea.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyTextArea.value).then(function() {
+      alert('Text copied to clipboard!');
+    }, function(err) {
+      alert('Failed to copy text: ', err);
+    });
+  }
+</script>
+
   <script>
-    function copyText() {
-        const copyTextArea = document.getElementById('copySource');
-        copyTextArea.select();
-        copyTextArea.setSelectionRange(0, 99999); // For mobile devices
-        navigator.clipboard.writeText(copyTextArea.value).then(function() {
-            alert('Text copied to clipboard!');
-        }, function(err) {
-            alert('Failed to copy text: ', err);
-        });
+    const editor = CodeMirror.fromTextArea(document.getElementById('htmlEditor'), {
+      mode: "htmlmixed",
+      theme: "eclipse",
+      lineNumbers: true,
+      lineWrapping: true
+    });
+
+    const previewIframe = document.querySelector('#htmlPreview iframe');
+
+    function updatePreview() {
+      const userHTML = editor.getValue();
+
+      const defaultStyles = `
+        <style>
+          body {
+            font-family: 'Overpass', sans-serif;
+            color: #333;
+            background-color: #fff;
+            padding: 20px;
+          }
+          h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-bottom: 10px;
+          }
+          p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+          }
+          table {
+            border-collapse: collapse;
+            width: 100%;
+          }
+          th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+          }
+        </style>
+      `;
+
+      const fullHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>${defaultStyles}</head>
+        <body>
+          ${userHTML}
+        </body>
+        </html>
+      `;
+
+      previewIframe.srcdoc = fullHTML;
     }
+
+    editor.on('change', updatePreview);
+
+    // Initial preview load
+    updatePreview();
   </script>
+
 
 </body>
 </html>
