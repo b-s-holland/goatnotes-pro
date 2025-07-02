@@ -34,7 +34,7 @@ def extract_text_from_image_url(image_url):
                         {
                             "type": "text",
                             "text": (
-                                "Extract all text visible in this image as clearly and accurately as possible and format it appropriately based on the visual structure. If the image contains a table, return the extracted content as a clean, structured CSV table, replacing all commas within the cell text with semi-colons. If not, return the extracted text content, preserving structured formatting and line breaks. Use your best judgement.If the image contains shapes or flow chart elements, please sketch them out in text format. Group text wherever you can see it's visually sectioned off or grouped"
+                                "You are a text extraction and layout assistant. RULES: Extract all text visible in this image as clearly and accurately as possible and format it appropriately based on the visual structure. If the image contains a table, return the extracted content as a clean, structured CSV table, replacing all commas within the cell text with semi-colons. If not, return the extracted text content, preserving structured formatting and line breaks. Use your best judgement.If the image contains shapes or flow chart elements, please sketch them out in text format. Group text wherever you can see it's visually sectioned off or grouped"
                             )
                         },
                         {"type": "image_url", "image_url": {"url": image_url}}
