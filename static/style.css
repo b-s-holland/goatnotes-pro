@@ -1,50 +1,40 @@
-/* ✅ Overpass font family */
-body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
-  font-family: 'Overpass', sans-serif;
-}
-
-/* ✅ Mobile-first base styles */
 body {
-  background-color: #ccc;
   margin: 0;
   padding: 0;
+  font-family: 'Overpass', sans-serif;
+  background-color: #cfcece;
   color: #333;
   text-align: center;
-  font-size: 1rem;
 }
 
 .container {
   width: 90%;
   max-width: 600px;
-  margin: 10px auto;
-  padding: 15px;
-  border: 2px dashed #999;
+  margin: 20px auto;
+  padding: 20px;
   background-color: #fffefa;
+  border: 2px dashed #999;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 h1, h2 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   margin-bottom: 1em;
 }
 
 button, .custom-file-upload {
+  display: block;
   width: 100%;
   max-width: 300px;
-  padding: 14px 14px;
-  font-size: 1.2rem;
   margin: 10px auto;
+  padding: 14px;
+  font-size: 1.1rem;
   background-color: #333;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: block;
-  text-align: center;
-  transition: background-color 0.2s ease;
+  margin-bottom: 10px;
 }
 
 button:hover, .custom-file-upload:hover {
@@ -52,189 +42,23 @@ button:hover, .custom-file-upload:hover {
   color: black;
 }
 
-textarea {
-  width: 100%;
-  height: 150px;
-  padding: 10px;
-  font-size: 1rem;
-  margin-top: 1em;
-  border: 1px solid #ccc;
-  resize: vertical;
-  text-align: left;
-  margin-left: 10px;
-}
-
 input[type="file"] {
   display: none;
 }
 
-.custom-file-upload {
-  display: block;
-  width: auto;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.preview-image {
-  max-width: 300px;
-  height: auto;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  margin: 1rem 0;
-  text-align: left;
-}
-
-.scan-output {
-  background: #f9f9f9;
-  padding: 1rem;
-  border: 1px dashed #aaa;
-  white-space: pre-wrap;
-  text-align: left;
-  margin-inline: 10px;
+#file-name {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: green;
 }
 
 .notice {
-  font-size: 0.9rem;
-  color: green;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 15px;
   font-style: italic;
-  margin-top: 10px;
 }
 
-/* ✅ Large mobile-friendly buttons */
-button {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  padding: 16px 20px;
-  font-size: 18px;
-  text-align: center;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-family: 'Overpass', sans-serif;
-  margin: 12px auto;
-}
-
-/* ✅ Thumbnail Preview (HTML layout preview) */
-.thumbnail-preview {
-  border: 1px dashed #999;
-  padding: 16px;
-  margin-top: 20px;
-  background-color: #fff;
-  max-width: 500px;
-  overflow-x: auto;
-  text-align: left;
-}
-
-.thumbnail-preview table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.thumbnail-preview table,
-.thumbnail-preview th,
-.thumbnail-preview td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.thumbnail-preview h1,
-.thumbnail-preview h2,
-.thumbnail-preview h3 {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 4px;
-  margin-top: 16px;
-}
-
-.thumbnail-preview div,
-.thumbnail-preview section,
-.thumbnail-preview li {
-  font-size: 14px;
-  line-height: 1.4;
-  text-align: left;
-  margin-inline: 10px;
-  max-width: 575px;
-}
-
-.thumbnail-preview ul,
-.thumbnail-preview ol {
-  padding-left: 20px;
-}
-
-.thumbnail-preview input,
-.thumbnail-preview button,
-.thumbnail-preview textarea {
-  display: inline-block;
-  border: 1px solid #aaa;
-  padding: 4px 8px;
-  font-size: 13px;
-  background-color: #ffffff;
-}
-
-/* ✅ Uploaded Image Preview */
-.uploaded-image {
-  margin-top: 20px;
-  max-width: 600px;
-  display: block;
-}
-
-.uploaded-image img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #ccc;
-  display: block;
-  margin: 0 auto;
-}
-
-/* ✅ AI-Cleaned Layout Area */
-.ai-cleaned-layout {
-  background-color: #ffffff;
-  padding: 30px 40px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  max-width: 800px;
-  margin: 40px auto;
-  color: #333333;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-.ai-preview-content {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  text-align: left;
-}
-
-/* ✅ Print styles */
-@media print {
-  body, button, table, input, textarea, select, div, h1, h2, h3, h4, h5, h6, p, span {
-    font-family: 'Overpass', sans-serif;
-    color: #000000;
-    background: none !important;
-    box-shadow: none !important;
-  }
-
-  .ai-cleaned-layout, .container, .ai-preview-content {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-}
-
-@keyframes l2 {to{background-size: 100% 3px}}
-
-.gochi-hand-regular {
-  font-family: "Gochi Hand", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 18px;
-}
-/* HTML: <div class="loader"></div> */
 .loader {
   width: 40px;
   height: 26px;
@@ -245,6 +69,7 @@ button {
     var(--c) 100% 100%;
   background-size:8px calc(100% - 4px);
   position: relative;
+  margin: auto;
 }
 .loader:before {
   content: "";
@@ -256,12 +81,34 @@ button {
   left: 0;
   top: 0;
   animation: 
-    l3-1 1.5s  linear infinite alternate,
+    l3-1 1.5s linear infinite alternate,
     l3-2 0.75s cubic-bezier(0,200,.8,200) infinite;
 }
 @keyframes l3-1 {
-  100% {left:calc(100% - 8px)}
+  100% { left:calc(100% - 8px) }
 }
 @keyframes l3-2 {
-  100% {top:-0.1px}
+  100% { top:-0.1px }
+}
+
+
+#uploading {
+  display: none;
+}
+
+#preview-image {
+  display: none;
+  max-width: 300px;
+  width: 100%;
+  border: 1px dashed #999;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.gochi-hand-regular {
+  font-family: "Gochi Hand", cursive;
 }
