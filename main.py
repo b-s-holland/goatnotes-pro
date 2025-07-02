@@ -4,11 +4,14 @@ from dotenv import load_dotenv
 import cloudinary
 import cloudinary.uploader
 import openai
+import requests
+import tempfile
+import urllib.request
 
 app = Flask(__name__)
 load_dotenv()
 
-# Cloudinary config
+# Cloudinary Config
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
     api_key=os.getenv("CLOUDINARY_API_KEY"),
@@ -16,6 +19,7 @@ cloudinary.config(
     secure=True
 )
 
+# OpenAI API Key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # --- OCR Step 1: Extract Text from Image ---
@@ -30,9 +34,7 @@ def extract_text_from_image_url(image_url):
                         {
                             "type": "text",
                             "text": (
-                                "Extract all visible text from this image as clearly and accurately as possible. "
-                                "Preserve any headings, bullet points, tables (as CSV), and flowcharts (as ASCII). "
-                                "Prioritise structured formatting."
+                                "Extract all text visible in this image as clearly and accurately as possible and format it appropriately based on the visual structure. If the image contains a table, return the extracted content as a clean, structured CSV table, replacing all commas within the cell text with semi-colons. If not, return the extracted text content, preserving structured formatting and line breaks. Use your best judgement.If the image contains shapes or flow chart elements, please sketch them out in text format. Group text wherever you can see it's visually sectioned off or grouped"
                             )
                         },
                         {"type": "image_url", "image_url": {"url": image_url}}
@@ -93,26 +95,23 @@ def generate_html_layout_from_text(structured_text_output):
     except Exception as e:
         return f"[HTML layout generation failed: {e}]"
 
-# --- Home Page ---
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# --- Process Upload and AI Layout ---
 @app.route('/process', methods=['POST'])
 def process():
     file = request.files.get('file')
     if file and file.filename:
         try:
-            # Upload image to Cloudinary
             upload_result = cloudinary.uploader.upload(file)
             image_url = upload_result.get("secure_url")
 
-            # Step 1: OCR
             extracted_text = extract_text_from_image_url(image_url)
-
-            # Step 2: AI Layout
             generated_html_layout = generate_html_layout_from_text(extracted_text)
+
 
         except Exception as e:
             extracted_text = f"[Error: {e}]"
@@ -125,15 +124,13 @@ def process():
         "result.html",
         scanned_text=extracted_text,
         scanned_image=image_url,
-        generated_html_layout=generated_html_layout
+        generated_html_layout=generated_html_layout,
     )
 
-# --- Print-friendly export view ---
 @app.route('/print_view', methods=['POST'])
 def print_view():
     html_content = request.form.get('html_content')
     return render_template('print_view.html', html_content=html_content)
 
-# --- Run Flask App ---
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
