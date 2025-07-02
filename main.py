@@ -65,7 +65,7 @@ def generate_html_layout_from_text(structured_text_output):
             )
         else:
             system_prompt = (
-                "You are a layout assistant. Format the following extracted note content into clean, minimal HTML for a single webpage section. Output only the inner HTML body content—headings, paragraphs, lists, and basic inline styles are okay. ❌ Do not include any outer HTML, HEAD, or BODY tags. ❌ Do not include scripts, forms, buttons, or full page structures. ✅ Only return the HTML needed for the content section itself. "
+                "You are a layout assistant. Format the following extracted note content into clean, minimal HTML for a single webpage section. Output only the inner HTML body content—headings, paragraphs, lists, and basic inline styles are okay. ❌ Do not include any outer HTML, HEAD, or BODY tags. ❌ Do not include scripts, forms, buttons, or full page structures. ✅ Only return the HTML needed for the content section itself. No triple backticks. No labels like plaintext"
                 "Use headings (<h2>, <h3>), sections, divs, and semantic spacing. "
                 "Reflect any lists, headings, or flowchart structures where visible. "
                 "Do not create a table unless the text is in CSV format."
