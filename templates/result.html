@@ -133,23 +133,17 @@
     <button type="submit">Download/Share PDF</button>
   </form>
 
-  <!-- ✅ User HTML Output (safe) -->
-  <div class="ai-cleaned-layout">
-    <div class="ai-preview-content">
-      {{ generated_html_layout | safe }}
-    </div>
-  </div>
 
   <!-- ✅ Live HTML Editor + Preview -->
+  <h3>📝 Edit HTML and Preview Live Below:</h3>
+  <div id="htmlPreview">
+    <iframe></iframe>
+  </div>
   <div class="editor-preview-wrapper">
-    <h3>📝 Edit HTML and Preview Live:</h3>
     <textarea id="htmlEditor">{{ generated_html_layout | safe }}</textarea>
-    <div id="htmlPreview">
-      <iframe></iframe>
-    </div>
   </div>
 
-  <textarea name="html_content" style="display:none;">{{ generated_html_layout | safe }}</textarea>
+
   <button type="custom-file-upload">
     <a href="https://goatnotes.pro" style="text-decoration: none; color: #fff;">Convert Another Note</a>
   </button>
