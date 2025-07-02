@@ -112,3 +112,10 @@ input[type="file"] {
 .gochi-hand-regular {
   font-family: "Gochi Hand", cursive;
 }
+
+#scanResult hr {
+  max-width: 100%;
+  margin: 20px auto;
+  border: none;
+  border-top: 1px solid #ccc;
+}
